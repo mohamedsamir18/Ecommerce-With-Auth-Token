@@ -1,6 +1,6 @@
 ﻿namespace EcommerceAuthToken.Models
 {
-    public class RegisterModel
+    public class Register
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

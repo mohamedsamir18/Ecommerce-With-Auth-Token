@@ -1,6 +1,6 @@
 ﻿namespace EcommerceAuthToken.Models
 {
-    public class AuthModel
+    public class Auth
     {
         public string Message { get; set; }
         public bool IsAuth { get; set; }

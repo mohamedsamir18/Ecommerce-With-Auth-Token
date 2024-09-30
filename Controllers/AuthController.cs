@@ -1,5 +1,6 @@
 ﻿using EcommerceAuthToken.Models;
 using EcommerceAuthToken.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceAuthToken.Controllers
@@ -14,7 +15,7 @@ namespace EcommerceAuthToken.Controllers
             _authservice = authservice;
         }
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync([FromBody]RegisterModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody]Register model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -27,7 +28,7 @@ namespace EcommerceAuthToken.Controllers
             return Ok(new { token=result.Token , expires = result.Expireson });
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
+        public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequest model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -40,8 +41,10 @@ namespace EcommerceAuthToken.Controllers
             return Ok(result);
         }
 
+
+        [Authorize(Roles ="SuperAdmin")]
         [HttpPost("AddRole")]
-        public async Task<IActionResult> AddRoleAsync([FromBody] AddRoleModel model)
+        public async Task<IActionResult> AddRoleAsync([FromBody] AddRole model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

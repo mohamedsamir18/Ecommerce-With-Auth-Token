@@ -7,15 +7,15 @@ namespace EcommerceAuthToken.Controllers
     [Authorize(Roles ="StoreOwner")]
     [Route("api/[controller]")]
     [ApiController]
-    public class StoreOwner : ControllerBase
+    public class StoreOwnerController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public StoreOwner(ApplicationDbContext context)
+        public StoreOwnerController(ApplicationDbContext context)
         {
             _context = context;
         }
         [HttpPost]
-        public async Task<ActionResult<ProductModel>> PostProduct([FromBody] ProductModel model)
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product model)
         {
             _context.products.Add(model);
             await _context.SaveChangesAsync();
@@ -34,7 +34,7 @@ namespace EcommerceAuthToken.Controllers
             return NoContent();
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateProduct(int id,ProductModel updatedproduct)
+        public async Task<IActionResult>UpdateProduct(int id,Product updatedproduct)
         {
             if (id != updatedproduct.ID)
             {
@@ -51,7 +51,7 @@ namespace EcommerceAuthToken.Controllers
             return Ok(updatedproduct);
         }
         [HttpPut("{id2}")]
-        public async Task<IActionResult> UpdateOrder(int id2, OrederModel orderstatus)
+        public async Task<IActionResult> UpdateOrder(int id2, Oreder orderstatus)
         {
             if (id2 != orderstatus.Id)
             {

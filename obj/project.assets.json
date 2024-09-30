@@ -8055,11 +8055,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\EcommerceAuthToken.csproj",
+      "projectUniqueName": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\Ecommerce-With-Auth-Token\\EcommerceAuthToken.csproj",
       "projectName": "EcommerceAuthToken",
-      "projectPath": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\EcommerceAuthToken.csproj",
+      "projectPath": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\Ecommerce-With-Auth-Token\\EcommerceAuthToken.csproj",
       "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\obj\\",
+      "outputPath": "C:\\Users\\moham\\source\\repos\\EcommerceAuthToken\\Ecommerce-With-Auth-Token\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",

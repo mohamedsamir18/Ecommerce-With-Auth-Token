@@ -4,8 +4,8 @@ namespace EcommerceAuthToken.Services
 {
     public interface IAuthService
     { 
-        Task<AuthModel> RegisterAsync(RegisterModel model);
-        Task<AuthModel> GetTokenAsync(TokenRequestModel model);
-        Task<string> AddRoleAsync(AddRoleModel model);
+        Task<Auth> RegisterAsync(Register model);
+        Task<Auth> GetTokenAsync(TokenRequest model);
+        Task<string> AddRoleAsync(AddRole model);
     }
 }

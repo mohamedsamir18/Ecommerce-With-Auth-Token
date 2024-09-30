@@ -1,39 +1,38 @@
 ﻿using EcommerceAuthToken.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceAuthToken.Controllers
 {
-    [Authorize(Roles ="Customer")]
+    [Authorize(Roles ="SuperAdmin")]
     [Route("api/[controller]")]
     [ApiController]
-    public class Customer : ControllerBase
+    public class SuperAdminController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public Customer(ApplicationDbContext context)
+        public SuperAdminController(ApplicationDbContext context)
         {
             _context = context;
         }
         [HttpPost]
-        public async Task<ActionResult<OrederModel>> CreateOrder([FromBody] OrederModel model)
+        public async Task<ActionResult<Store>> PostStore([FromBody] Store model)
         {
-            await _context.oreders.AddAsync(model);
+            _context.stores.Add(model);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(model), new { id = model.Id }, model);
         }
-
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
+        public async Task<IActionResult>DeleteStore(int id)
         {
-            var order = await _context.oreders.FindAsync(id);
-            if (order == null)
+            var store = await _context.stores.FindAsync(id);
+            if (store == null)
             {
                 return NotFound();
             }
-            _context.oreders.Remove(order);
+            _context.stores.Remove(store);
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        
     }
 }

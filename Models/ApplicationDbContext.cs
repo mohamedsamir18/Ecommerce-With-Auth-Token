@@ -9,14 +9,14 @@ namespace EcommerceAuthToken.Models
         {
             
         }
-        public DbSet<StoreModel> stores { get; set; }
-        public DbSet<ProductModel> products { get; set; }
-        public DbSet<OrederModel> oreders { get; set; }
+        public DbSet<Store> stores { get; set; }
+        public DbSet<Product> products { get; set; }
+        public DbSet<Oreder> oreders { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<StoreModel>().HasMany(s => s.products).WithOne(p => p.store).HasForeignKey(p => p.StoreId);
-            builder.Entity<ProductModel>().HasMany(p => p.oreders).WithMany(o => o.products);
+            builder.Entity<Store>().HasMany(s => s.products).WithOne(p => p.store).HasForeignKey(p => p.StoreId);
+            builder.Entity<Product>().HasMany(p => p.oreders).WithMany(o => o.products);
         }
     }
 }

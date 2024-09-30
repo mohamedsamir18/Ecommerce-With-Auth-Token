@@ -29,13 +29,13 @@ namespace TestApiJWT.Services
             _jwt = jwt.Value;
         }
 
-        public async Task<AuthModel> RegisterAsync(RegisterModel model)
+        public async Task<Auth> RegisterAsync(Register model)
         {
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
-                return new AuthModel { Message = "Email is already registered!" };
+                return new Auth { Message = "Email is already registered!" };
 
             if (await _userManager.FindByNameAsync(model.UserName) is not null)
-                return new AuthModel { Message = "Username is already registered!" };
+                return new Auth { Message = "Username is already registered!" };
 
             var user = new ApplicationUser
             {
@@ -54,14 +54,14 @@ namespace TestApiJWT.Services
                 foreach (var error in result.Errors)
                     errors += $"{error.Description},";
 
-                return new AuthModel { Message = errors };
+                return new Auth { Message = errors };
             }
 
             await _userManager.AddToRoleAsync(user, "Customer");
 
             var jwtSecurityToken = await CreateJwtToken(user);
 
-            return new AuthModel
+            return new Auth
             {
                 Email = user.Email,
                 Expireson = jwtSecurityToken.ValidTo,
@@ -72,9 +72,9 @@ namespace TestApiJWT.Services
             };
         }
 
-        public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
+        public async Task<Auth> GetTokenAsync(TokenRequest model)
         {
-            var authModel = new AuthModel();
+            var authModel = new Auth();
 
             var user = await _userManager.FindByEmailAsync(model.Email);
 
@@ -97,7 +97,7 @@ namespace TestApiJWT.Services
             return authModel;
         }
 
-        public async Task<string> AddRoleAsync(AddRoleModel model)
+        public async Task<string> AddRoleAsync(AddRole model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
 
@@ -144,7 +144,7 @@ namespace TestApiJWT.Services
             return jwtSecurityToken;
         }
 
-        public Task<AuthModel> SetTokenAsync(TokenRequestModel model)
+        public Task<Auth> SetTokenAsync(TokenRequest model)
         {
             throw new NotImplementedException();
         }
